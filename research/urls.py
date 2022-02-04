@@ -3,5 +3,5 @@ from .import views
 
 
 urlpatterns = [
-        path('project/<str:pk>/', views.project, name="project"),
+        path('project/', views.project, name="project"),
 ]
