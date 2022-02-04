@@ -2,5 +2,5 @@ from django.shortcuts import render
 #from django.http import HttpResponse
 
 # Create your views here.
-def project(request):
-    return render(request, 'research.html')
+def research(request):
+    return render(request, 'research/research.html')

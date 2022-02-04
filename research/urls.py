@@ -3,5 +3,5 @@ from .import views
 
 
 urlpatterns = [
-        path('project/', views.project, name="project"),
+        path('research/', views.research, name="research"),
 ]
