@@ -1,3 +1,18 @@
 {% include 'index.html' %}
 <h1>Research!</h1>
-<p>lorem5000</p>
+<ul>
+    {% for project in projects%}
+        <p>Title: {{project.title}}</p>
+        <p>Description: {{project.description}}</p>
+        <hr>
+    {% endfor %}
+</ul>
+
+{% if number > 10 %}
+    <p>The number is greater than 10</p>
+{% elif number == 10 %}
+    <p>The number is 10</p>
+{% else %}
+    <p>The number is less than 10</p>
+{% endif %}
+
