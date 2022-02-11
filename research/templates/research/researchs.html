@@ -1,0 +1,24 @@
+{% include 'index.html' %}
+<h1>Researchs</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Research</th>
+        <th>Creation</th>
+    </tr>
+    {% for research in researchs %}
+        <tr>
+            <td>{{research.id}}</td>
+            <td>{{research.research_title}}</td>
+            <td>{{research.time_stamp}}</td>
+            <td><a href="{% url 'research' research.id %}">View</a></td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+
+
+
+

@@ -1,30 +1,24 @@
+from multiprocessing import context
 from django.shortcuts import render
+
+from research.models import Research
 #from django.http import HttpResponse
+from .models import Research
+from .forms import ResearchForm
 
 
-projectsList = [
-    {
-        "id": "1",
-        "title": "First Project",
-        "description": "This is the first project",
-    },
 
-    {
-        "id": "2",
-        "title": "Second Project",
-        "description": "This is the second project",
-    },
+def researchs(request):
+    researchs = Research.objects.all()
+    context = {'researchs': researchs}
+    return render(request, 'research/researchs.html', context)
 
-    {
-        "id": "3",
-        "title": "Third Project",
-        "description": "This is the third project",
-    },
-]
+def research(request, pk):
+    researchObj = Research.objects.get(id=pk)
+    return render(request, 'research/single-research.html',{'research': researchObj})
 
-# Create your views here.
-def research(request):
-    msg = "Hello this is the message!"
-    number = 10
-    context = {"msg": msg, "number":number, "projects":projectsList}
-    return render(request, 'research/research.html', context)
+
+def createResearch(request):
+    form = ResearchForm()
+    context = {'form': form}
+    return render(request, 'research/research-form.html', context)
