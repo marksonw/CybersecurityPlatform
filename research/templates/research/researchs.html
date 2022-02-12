@@ -6,6 +6,7 @@
         <th>ID</th>
         <th>Research</th>
         <th>Creation</th>
+        <th></th>
     </tr>
     {% for research in researchs %}
         <tr>
@@ -13,6 +14,8 @@
             <td>{{research.research_title}}</td>
             <td>{{research.time_stamp}}</td>
             <td><a href="{% url 'research' research.id %}">View</a></td>
+            <td><a href="{% url 'update-research' research.id %}">Edit</a></td>
+            <td><a href="{% url 'delete-research' research.id %}">Delete</a></td>
         </tr>
     {% endfor %}
 </table>

@@ -6,4 +6,4 @@ from .models import Research
 class ResearchForm(ModelForm):
     class Meta:
         model = Research
-        fields = '__all__'
+        fields = ['research_title', 'body', 'source', 'tags' ]
