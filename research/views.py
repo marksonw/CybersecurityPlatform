@@ -24,7 +24,7 @@ def createResearch(request):
 
     ## Create Blog Form Submission
     if request.method == 'POST':
-        form = ResearchForm(request.POST)
+        form = ResearchForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
         return redirect('researchs')
@@ -39,7 +39,7 @@ def updateResearch(request, pk):
     
     ## Update Blog Form Submission
     if request.method == 'POST':
-        form = ResearchForm(request.POST, instance=research_blog)
+        form = ResearchForm(request.POST, request.FILES, instance=research_blog)
         if form.is_valid():
             form.save()
             return redirect('researchs')
