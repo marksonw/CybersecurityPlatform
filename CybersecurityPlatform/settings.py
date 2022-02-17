@@ -41,8 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'research.apps.ResearchConfig',
+    'users.apps.UsersConfig',
     'ckeditor',
     'ckeditor_uploader',
+    
+
 ]
 
 CKEDITOR_UPLOAD_PATH = "uploads/"

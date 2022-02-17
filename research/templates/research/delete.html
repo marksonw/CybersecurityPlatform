@@ -4,7 +4,7 @@
 
 <form method="POST" action="">
     {% csrf_token %}
-    <h1>Are you would you like to delete "{{object}}" ?</h1>
+    <h1>Would you like to delete "{{object}}" ?</h1>
     <a href="{% url 'researchs' %}">
         Go Back
     </a>
