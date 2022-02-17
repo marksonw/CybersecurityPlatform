@@ -1,3 +1,4 @@
+from asyncio import SendfileNotAvailableError
 from contextlib import nullcontext
 from distutils.command.upload import upload
 from doctest import BLANKLINE_MARKER
@@ -6,8 +7,11 @@ from pickle import TRUE
 from unicodedata import name
 import uuid
 from email.policy import default
+from venv import create
 from django.db import models
 from django.contrib.auth.models import User
+
+
 
 class Profile(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
@@ -23,7 +27,7 @@ class Profile(models.Model):
     website = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
-        return str(self.user.username)
+        return str(self.username)
 
 class Interests(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
@@ -34,3 +38,4 @@ class Interests(models.Model):
     def __str__(self):
         return str(self.name)
     
+
