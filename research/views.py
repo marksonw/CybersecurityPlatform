@@ -1,6 +1,6 @@
 from multiprocessing import context
 from django.shortcuts import redirect, render
-
+from django.contrib.auth.decorators import login_required
 from research.models import Research
 #from django.http import HttpResponse
 from .models import Research
@@ -18,7 +18,9 @@ def research(request, pk):
     researchObj = Research.objects.get(id=pk)
     return render(request, 'research/single-research.html',{'research': researchObj})
 
+
 ## Create Research 
+@login_required(login_url='login')
 def createResearch(request):
     form = ResearchForm()
 
@@ -32,7 +34,9 @@ def createResearch(request):
     context = {'form': form}
     return render(request, 'research/research-form.html', context)
 
+
 ## Update Research Blog
+@login_required(login_url='login')
 def updateResearch(request, pk):
     research_blog = Research.objects.get(id=pk)
     form = ResearchForm(instance=research_blog)
@@ -48,6 +52,7 @@ def updateResearch(request, pk):
     return render(request, 'research/research-form.html', context)
 
 ## Delete Research Blog
+@login_required(login_url='login')
 def deleteResearch(request, pk):
     research_blog = Research.objects.get(id=pk)
 
