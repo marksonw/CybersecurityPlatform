@@ -1,14 +1,15 @@
 {% extends 'index.html'%}
 
 {% block content %}
-    
-<h1>Research Blog Form</h1>
 
-<form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form.as_p}}
-    {{form.media}}
-    <input type="submit">
-</form>
+<div class="container mx-auto">
+    <h1>Research Blog Form</h1>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        {{form.media}}
+        <input type="submit">
+    </form>
+</div>
 
 {% endblock %}

@@ -1,4 +1,5 @@
 from email import message
+from urllib.request import Request
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
@@ -9,62 +10,67 @@ from .forms import CustomUserCreationForm
 
 
 ## Register
-def registerUser(request):
-    page = 'register'
-    form = CustomUserCreationForm()
+# def registerUser(request):
+#     if request.user.is_authenticated:
+#         return redirect('profiles')
+#     else:
+#         page = 'register'
+#         form = CustomUserCreationForm()
+#         if request.method == "POST":
+#             form = CustomUserCreationForm(request.POST)
+#             if form.is_valid():
+#                 user = form.save(commit=False)
+#                 user.username = user.username.lower()
+#                 user.save()
 
+#                 messages.success(request, "Your account was successfully created! ")
 
-    if request.method == "POST":
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
+#                 login(request, user)
 
-            messages.success(request, "Your account was successfully created! ")
+#                 return redirect('profiles')
+#             else:
+#                 messages.error(request,"Something went wrong during registration!")
 
-            login(request, user)
-
-            return redirect('profiles')
-        else:
-            messages.error(request,"Something went wrong during registration!")
-
-    context = {'page': page, 'form':form}
-    return render(request, 'users/login.html', context)
+#         context = {'page': page, 'form':form}
+#         return render(request, 'users/login.html', context)
 
 
 ## Logout
-def logoutUser(request):
-    logout(request)
-    messages.error(request, "User was logged out!")
-    return redirect ('login')
+# @login_required(login_url='login')
+# def logoutUser(request):
+#     logout(request)
+#     messages.error(request, "User was logged out!")
+#     return redirect ('login')
 
-## Login
-def loginUser(request):
-    page = 'login'
-    if request.user.is_authenticated:
-        return redirect('profiles')
+# ## Login
+# def loginUser(request):
+#     if request.user.is_authenticated:
+#         return redirect('profiles')
+#     else:
+#         page = 'login'
+#         if request.user.is_authenticated:
+#             return redirect('profiles')
 
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+#         if request.method == 'POST':
+#             username = request.POST['username']
+#             password = request.POST['password']
 
-        try:
-            user: User.objects.get(username=username)
+#             try:
+#                 user: User.objects.get(username=username)
 
-        except:
-            messages.error(request, "User does not exist!")
+#             except:
+#                 messages.error(request, "User does not exist!")
 
-        user = authenticate(request, username=username, password=password)
+#             user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            login(request, user)
-            return redirect('profiles')
-        else:
-            messages.error(request, "Username/Password is not valid!")
+#             if user is not None:
+#                 login(request, user)
+#                 return redirect('profiles')
+#             else:
+#                 messages.error(request, "Username/Password is not valid!")
 
-    return render(request, 'users/login.html')
+#         return render(request, 'users/login.html')
 
-
+@login_required(login_url='accounts/login/')
 def profiles(request):
     return render(request, 'users/profile.html')

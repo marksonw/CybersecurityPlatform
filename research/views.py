@@ -8,19 +8,21 @@ from .forms import ResearchForm
 
 
 ## Researchs Menu Page View Routing 
+@login_required(login_url='/')
 def researchs(request):
     researchs = Research.objects.all()
     context = {'researchs': researchs}
     return render(request, 'research/researchs.html', context)
 
-## Research Page 
+## Research Page
+@login_required(login_url='/') 
 def research(request, pk):
     researchObj = Research.objects.get(id=pk)
     return render(request, 'research/single-research.html',{'research': researchObj})
 
 
 ## Create Research 
-@login_required(login_url='login')
+@login_required(login_url='/')
 def createResearch(request):
     form = ResearchForm()
 
@@ -36,7 +38,7 @@ def createResearch(request):
 
 
 ## Update Research Blog
-@login_required(login_url='login')
+@login_required(login_url='/')
 def updateResearch(request, pk):
     research_blog = Research.objects.get(id=pk)
     form = ResearchForm(instance=research_blog)
@@ -52,7 +54,7 @@ def updateResearch(request, pk):
     return render(request, 'research/research-form.html', context)
 
 ## Delete Research Blog
-@login_required(login_url='login')
+@login_required(login_url='/')
 def deleteResearch(request, pk):
     research_blog = Research.objects.get(id=pk)
 

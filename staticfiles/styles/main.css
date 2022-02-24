@@ -1,5 +1,5 @@
 *{
-    color: whitesmoke;
+    color: black;
 }
 
 body{
@@ -16,5 +16,31 @@ h1{
 }
 
 p{
-    color: rgb(168, 117, 8);
+    color: black;;
 }
+
+form input{
+    color: black;
+}
+
+
+/* input{
+    width:100%;
+    border:2px solid #aaa;
+    border-radius:4px;
+    margin:8px 0;
+    outline:none;
+    padding:8px;
+    box-sizing:border-box;
+    transition:.3s;
+    color: black;
+  }
+
+input p{
+    color: black;
+}
+  
+  input[type=text]:focus{
+    border-color:dodgerBlue;
+    box-shadow:0 0 8px 0 dodgerBlue;
+} */

@@ -39,14 +39,27 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'crispy_forms',
 
     'research.apps.ResearchConfig',
     'users.apps.UsersConfig',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.github',
+
+
     'ckeditor',
     'ckeditor_uploader',
     
 
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
@@ -54,7 +67,7 @@ CKEDITOR_CONFIGS = {
 
     'default': {
         'toolbar': 'full',
-        'height': 300,
+        'height': 400,
         'width': '100%',
     },
 
@@ -90,6 +103,13 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 WSGI_APPLICATION = 'CybersecurityPlatform.wsgi.application'
@@ -154,3 +174,23 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ACCOUNT_FORMS = {'signup': 'users.forms.MyCustomSignupForm'}
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_EMAIL_REQUIRED = True
+
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}

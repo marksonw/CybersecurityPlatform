@@ -1,0 +1,126 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+
+{% comment %} <h1>{% trans "Sign In" %}</h1> {% endcomment %}
+
+{% comment %} {% get_providers as socialaccount_providers %} {% endcomment %}
+
+{% if socialaccount_providers %}
+{% comment %} <p>{% blocktrans with site.name as site_name %}Please sign in with one
+of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+for a Threat Hub account and sign in below:{% endblocktrans %}</p> {% endcomment %}
+
+<div class="socialaccount_ballot">
+
+  <ul class="socialaccount_providers">
+    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+  </ul>
+
+  <div class="login-or">{% trans 'or' %}</div>
+
+</div>
+
+<div class=""></div>{% include "socialaccount/snippets/login_extra.html" %}
+
+{% else %}
+{% comment %} <p>{% blocktrans %}If you have not created an account yet, then please
+<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p> {% endcomment %}
+{% endif %}
+
+<form class="login" method="POST" action="{% url 'account_login' %}">
+  <button href="{% provider_login_url "github" process="login" %}" class="bg-white active:bg-blueGray-50 text-black italic font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150" type="button">
+    <img alt="github" class="w-5 mr-1" src="https://demos.creative-tim.com/notus-js/assets/img/github.svg"><a href="{% provider_login_url "github" process="login" %}">Sign In with GitHub</a>
+  </button>
+  <br>
+  <button class="bg-white active:bg-blueGray-50 text-black italic font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150" type="button">
+    <img alt="google" class="w-5 mr-1" src="https://demos.creative-tim.com/notus-js/assets/img/google.svg"><a href="{% provider_login_url "google" process="login" %}">Sign In with Google</a></button>
+  <br>
+  <hr>
+  {% csrf_token %}
+  
+
+ 
+  {{ form | crispy }}
+
+    {% comment %} {% for field in form %}
+                        
+                            <label class="label block uppercase text-red-600 text-xs font-bold mb-2 rounded-lg" for="grid-password"></label>
+                            {{ field }}
+                            
+                        {% for error in field.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                        
+    {% endfor %} {% endcomment %}
+
+
+    
+
+   
+
+
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  
+  <button class="bg-indigo-900 px-5 py-3 text-sm shadow-sm font-medium tracking-wider  text-indigo-100 rounded-full hover:shadow-2xl hover:bg-indigo-800" type="submit">{% trans "Sign In" %}</button>
+  <br>
+  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+</form>
+
+
+
+{% comment %} <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
+<link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
+
+
+<section class="bg-blueGray-50">
+  <div class="w-full lg:w-4/12 px-4 mx-auto pt-6">
+    <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
+      <div class="rounded-t mb-0 px-6 py-6">
+        <div class="text-center mb-3">
+          <h6 class="text-blueGray-500 text-sm font-bold">
+            Sign in with
+          </h6>
+        </div>
+        <div class="btn-wrapper text-center">
+          <button class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150" type="button">
+            <img alt="..." class="w-5 mr-1" src="https://demos.creative-tim.com/notus-js/assets/img/github.svg">Github</button>
+          <button class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150" type="button">
+            <img alt="..." class="w-5 mr-1" src="https://demos.creative-tim.com/notus-js/assets/img/google.svg">Google </button>
+
+        </div>
+        <hr class="mt-6 border-b-1 border-blueGray-300">
+      </div>
+      <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+        <div class="text-blueGray-400 text-center mb-3 font-bold">
+          <small>Or sign in with credentials</small>
+        </div>
+        <form>
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password">Email</label><input type="email" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Email">
+          </div>
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password">Password</label><input type="password" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Password">
+          </div>
+          <div>
+            <label class="inline-flex items-center cursor-pointer"><input id="customCheckLogin" type="checkbox" class="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"><span class="ml-2 text-sm font-semibold text-blueGray-600">Remember me</span></label>
+          </div>
+          <div class="text-center mt-6">
+            <button class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150" type="button"> Sign In </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section> {% endcomment %}
+
+{% endblock %}
