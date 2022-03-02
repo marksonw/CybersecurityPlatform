@@ -22,9 +22,10 @@ class Research(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     owner = models.ForeignKey(Profile, null=True, blank=True, on_delete=models.SET_NULL)
     research_title = models.CharField(max_length=256)
+    description = models.CharField(max_length=256)
     banner_image = models.ImageField(null=True, blank=True, default="default-banner.jpg")
     body = RichTextUploadingField(null=True, blank=True)
-    hashes = models.TextField(null=True, blank=True)
+    #hashes = models.TextField(null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     time_stamp = models.DateTimeField(auto_now_add=True)
 

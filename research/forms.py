@@ -6,4 +6,4 @@ from .models import Research
 class ResearchForm(ModelForm):
     class Meta:
         model = Research
-        fields = ['banner_image','research_title', 'body', 'hashes', 'tags']
+        fields = ['banner_image','research_title', 'description', 'body', 'tags']
