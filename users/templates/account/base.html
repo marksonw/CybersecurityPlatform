@@ -43,7 +43,7 @@
     <ul>
       {% if user.is_authenticated %}
       <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
-      <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+      {% comment %} <li><a href="{% url 'account_logout' %}">Sign Out</a></li> {% endcomment %}
       {% else %}
       <li><a class="bg-indigo-900 px-5 py-3 text-sm shadow-sm font-medium tracking-wider  text-indigo-100 rounded-full hover:shadow-2xl hover:bg-indigo-800" href="{% url 'account_signup' %}"> Don't have an account ? Sign Up</a></li>
       {% endif %}

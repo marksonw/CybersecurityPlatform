@@ -71,7 +71,7 @@ for a Threat Hub account and sign in below:{% endblocktrans %}</p> {% endcomment
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
   
-  <button class="bg-indigo-900 px-5 py-3 text-sm shadow-sm font-medium tracking-wider  text-indigo-100 rounded-full hover:shadow-2xl hover:bg-indigo-800" type="submit">{% trans "Sign In" %}</button>
+  <button class="" type="submit">{% trans "Sign In" %}</button>
   <br>
   <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
 </form>

@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CustomUserCreationForm
+from .models import Interests, Profile
 
 
 
@@ -73,4 +74,17 @@ from .forms import CustomUserCreationForm
 
 @login_required(login_url='accounts/login/')
 def profiles(request):
-    return render(request, 'users/profile.html')
+    profiles = Profile.objects.all()
+    interests = Interests.objects.all()
+    context = {'profiles': profiles, 'interests': interests}
+    return render(request, 'users/profile.html', context)
+
+
+def userProfile(request, pk):
+    profile = Profile.objects.get(id=pk)
+
+    interests = profile.interests_set.all()
+
+    context = {'profile': profile, 'interests': interests,}
+
+    return render(request, 'users/user-profile.html', context)

@@ -11,9 +11,6 @@ img{
     height: 250px;
 }
 
-h1{
-
-}
 
 p{
     color: whitesmoke;
@@ -26,6 +23,8 @@ form input{
 #id_banner_image{
     width: 100px;
 }
+
+
 
 
 input{
@@ -48,4 +47,88 @@ input p{
     border-color:dodgerBlue;
     box-shadow:0 0 8px 0 dodgerBlue;
 }
+
+.modtags{
+    width:20%;
+    border:2px solid #aaa;
+    border-radius:4px;
+    margin:8px 0;
+    outline:none;
+    padding:8px;
+    box-sizing:border-box;
+    transition:.3s;
+    color: red;
+}
+
+.modtags input:focus{
+    border-color:dodgerBlue;
+    box-shadow:0 dodgerBlue;
+}
+
+
+input[type=submit]{
+    text-align: center;
+    width: 100%;
+    background-color: transparent;
+    border: 3px solid #00d7c3;
+    border-radius: 50px;
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+    color: #00d7c3;
+}
+
+input[type=submit]:hover{
+    box-shadow: 0 0 10px 0 #00d7c3 inset, 0 0 20px 2px #00d7c3;
+    border: 3px solid #00d7c3;
+}
+
+
+
+
+
+
+button[type=submit] {
+    margin: 5px;
+    width: 100%;
+    position: relative;
+    color: #00aced;
+    border: none;
+    z-index: 2;
+  }
+  button[type=submit]:before,
+  button[type=submit]:after {
+    position: absolute;
+    content: "";
+    width: 20%;
+    height: 20%;
+    border: 1px solid;
+    
+    z-index: -1;
+    transition: all 0.3s ease;
+  }
+  button[type=submit]:before{
+     top: 0;
+     left: 0;
+     border-bottom-color: transparent;
+     border-right-color: transparent;
+     border-top-color: #00aced;
+     border-left-color: #00aced;
+  }
+  button[type=submit]:after{
+     bottom: 0;
+     right: 0;
+     border-top-color: transparent;
+     border-left-color: transparent;
+     border-bottom-color: #00aced;
+     border-right-color: #00aced;
+  }
+  button[type=submit]:hover:before,
+  button[type=submit]:hover:after {
+    border-color: #00aced;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 0 5px #00aced, 0 0 5px #00aced inset;
+  }
+  
+  
 

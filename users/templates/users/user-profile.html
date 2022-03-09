@@ -1,0 +1,19 @@
+{% include 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1>Name: {{profile.user|title}}</h1>
+{% for interest in interests %}
+
+<div class="flex justify-between ">
+    <div class="pill bg-[#6b0f1a] rounded-full text-xs italic px-4 py-1 mr-2">
+      <p><small class="italic" style="color: whitesmoke">{{interest.name}}</small></p>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock content %}
+
+

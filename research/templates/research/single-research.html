@@ -4,7 +4,7 @@
     <br>
     <img src="{{research.banner_image.url}}" alt="banner" id="blog-banner">
     <h1>{{research.research_title}}</h1>
-    <p>{{research.owner}}</p>
+    <p>Researcher Name: <bold>{{research.owner}}</bold></p>
     <hr>
     {% for tags in research.tags.all %}
         <span style="border: 1px solid red;">{{tags}}</span>

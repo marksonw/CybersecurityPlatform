@@ -24,6 +24,10 @@ form input{
 }
 
 
+.footer{
+    background-color: black;
+}
+
 /* input{
     width:100%;
     border:2px solid #aaa;
