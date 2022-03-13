@@ -79,7 +79,7 @@ def profiles(request):
     context = {'profiles': profiles, 'interests': interests}
     return render(request, 'users/profile.html', context)
 
-
+@login_required(login_url='accounts/login/')
 def userProfile(request, pk):
     profile = Profile.objects.get(id=pk)
 

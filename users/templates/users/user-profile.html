@@ -3,17 +3,89 @@
 
 {% block content %}
 
-<h1>Name: {{profile.user|title}}</h1>
-{% for interest in interests %}
+<div class="container mx-auto mt-5 bg-gradient-to-bl from-slate-900 via-black to-slate-900 rounded-lg">
 
-<div class="flex justify-between ">
-    <div class="pill bg-[#6b0f1a] rounded-full text-xs italic px-4 py-1 mr-2">
-      <p><small class="italic" style="color: whitesmoke">{{interest.name}}</small></p>
+
+  <div class="sm:w-1/3 p-2 mx-auto">
+    <img src="{% static '/imgs/logo.png' %}" class="w-full">
+    <div class="bg-gray-900 px-6 py-8 rounded-lg shadow-lg text-center mt-5 border-2 border-[#870017]">
+      <div class="mb-3">
+        <img
+          class="w-auto mx-auto rounded-full"
+          src="{{profile.profile_image.url}}"
+          alt=""
+        />
+      </div>
+      <h2 class="text-xl font-medium text-white-700 italic">{{profile.user|title}}</h2>
+      <br>
+      <span class="text-white-500 block mb-5"> <strong class='text-white'>About:</strong> {{profile.bio|slice:"160"}}</span>
+
+      
+      <div class="flex inline-block">
+        {% for interest in interests %}
+          <div class="pill bg-[#6b0f1a] rounded-full text-xs italic px-4 py-1 mr-2">
+            <small class="italic" style="color: whitesmoke">{{interest.name}}</small>
+          </div>  
+        {% endfor %}
+      </div>
+      
+      <br>
+      <div class="w-full flex justify-center pt-5 pb-5">
+      {% if profile.github %}
+        <a href="{{profile.github}}" class="mx-5">
+          <div aria-label="Github" role="img">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#718096"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-github"
+            >
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+              ></path>
+            </svg>
+          </div>
+        </a> 
+      {% endif %}
+      {% if profile.twitter %}
+        <a href="javascript:void(0)" class="mx-2">
+          <div aria-label="Twitter" role="img">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#718096"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-twitter"
+            >
+              <path
+                d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
+              ></path>
+            </svg>
+          </div>
+        </a>
+      {% endif %}
     </div>
+
+      </div>
+    </div>
+    
 </div>
 
-{% endfor %}
+
+
 
 {% endblock content %}
+
 
 
