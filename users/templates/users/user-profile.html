@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<div class="container mx-auto mt-5 bg-gradient-to-bl from-slate-900 via-black to-slate-900 rounded-lg">
+<div class="mx-auto mt-5 bg-gradient-to-bl from-slate-900 via-black to-slate-900">
 
 
   <div class="sm:w-1/3 p-2 mx-auto">
@@ -22,7 +22,7 @@
 
       
       <div class="flex inline-block">
-        {% for interest in interests %}
+        {% for interest in interests|slice:"6" %}
           <div class="pill bg-[#6b0f1a] rounded-full text-xs italic px-4 py-1 mr-2">
             <small class="italic" style="color: whitesmoke">{{interest.name}}</small>
           </div>  
@@ -79,7 +79,38 @@
 
       </div>
     </div>
+    <br>
+
     
+    {% if profile.research_set.all %}
+      <div class="min-h-screen">
+        <p class="text-center text-4xl font-semibold py-4">Research Blogs</p>
+        <div class="p-4 gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 select-none">
+        {% for research in profile.research_set.all  %}
+          <a href="{% url 'research' research.id %}" class="w-full cursor-pointer rounded-md shadow-md shadow-gray-200 bg-blue-900 hover:shadow-blue-400/80 hover:shadow-2xl hover:bg-blue-700 ">
+            <img class="aspect-video bg-cover w-full rounded-t-md min-h-30 max-h-45" src="{{research.banner_image.url}}" />
+            <div class="p-4">
+              <span class="text-gray-400 italic font-normal text-base">{{research.time_stamp.date}}</span>
+              <p class="font-semibold italic text-xl py-2">{{research.research_title}}</p>
+              <p class="font-mono text-white-700 text-justify line-clamp-3">{{research.description}}</p>
+              <div class="flex flex-wrap mt-10 space-x-4 align-bottom">
+
+                  {% for tag in research.tags.all  %}
+                  <div class="pill bg-[#6b0f1a] rounded-full text-xs italic px-4 py-1">
+                      <small>{{tag|slice:"15"}}</small>
+                  </div>
+                  {% endfor %}
+
+              </div>
+            </div>
+          </a>
+          {% endfor %}
+    {% endif %}
+
+      </div>
+    </div>
+
+
 </div>
 
 
