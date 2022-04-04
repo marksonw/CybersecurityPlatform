@@ -1,76 +1,83 @@
-*{
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&family=Signika+Negative:wght@300&display=swap');
+
+/* font-family: 'Chakra Petch', sans-serif;
+font-family: 'Signika Negative', sans-serif; */
+* {
     color: whitesmoke;
 }
 
-body{
+body {
     background: linear-gradient(-90deg, #01172b, #00101f);
 }
 
 
 
-img{
+img {
     width: 250px;
     height: 250px;
 }
 
 
-p{
+p {
     color: whitesmoke;
 }
 
-form input{
+form input {
     color: black;
 }
 
-#id_banner_image{
+#id_banner_image {
     width: 100px;
 }
 
-
-
-
-
-
-input{
-    width:100%;
-    border:2px solid #aaa;
-    border-radius:4px;
-    margin:8px 0;
-    outline:none;
-    padding:8px;
-    box-sizing:border-box;
-    transition:.3s;
-    color: black;
-  }
-
-input p{
-    color: black;
-}
-  
-  input:focus{
-    border-color:dodgerBlue;
-    box-shadow:0 0 8px 0 dodgerBlue;
+.text-white {
+    color: white;
 }
 
-.modtags{
-    width:20%;
-    border:2px solid #aaa;
-    border-radius:4px;
-    margin:8px 0;
-    outline:none;
-    padding:8px;
-    box-sizing:border-box;
-    transition:.3s;
+
+
+
+
+input {
+    width: 100%;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    margin: 8px 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: .3s;
+    color: black;
+}
+
+input p {
+    color: black;
+}
+
+input:focus {
+    border-color: dodgerBlue;
+    box-shadow: 0 0 8px 0 dodgerBlue;
+}
+
+.modtags {
+    width: 20%;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    margin: 8px 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: .3s;
     color: red;
 }
 
-.modtags input:focus{
-    border-color:dodgerBlue;
-    box-shadow:0 dodgerBlue;
+.modtags input:focus {
+    border-color: dodgerBlue;
+    box-shadow: 0 dodgerBlue;
 }
 
 
-input[type=submit]{
+input[type=submit] {
     text-align: center;
     width: 100%;
     background-color: transparent;
@@ -81,7 +88,7 @@ input[type=submit]{
     color: #00d7c3;
 }
 
-input[type=submit]:hover{
+input[type=submit]:hover {
     box-shadow: 0 0 10px 0 #00d7c3 inset, 0 0 20px 2px #00d7c3;
     border: 3px solid #00d7c3;
 }
@@ -98,41 +105,42 @@ button[type=submit] {
     color: #00aced;
     border: none;
     z-index: 2;
-  }
-  button[type=submit]:before,
-  button[type=submit]:after {
+}
+
+button[type=submit]:before,
+button[type=submit]:after {
     position: absolute;
     content: "";
     width: 20%;
     height: 20%;
     border: 1px solid;
-    
+
     z-index: -1;
     transition: all 0.3s ease;
-  }
-  button[type=submit]:before{
-     top: 0;
-     left: 0;
-     border-bottom-color: transparent;
-     border-right-color: transparent;
-     border-top-color: #00aced;
-     border-left-color: #00aced;
-  }
-  button[type=submit]:after{
-     bottom: 0;
-     right: 0;
-     border-top-color: transparent;
-     border-left-color: transparent;
-     border-bottom-color: #00aced;
-     border-right-color: #00aced;
-  }
-  button[type=submit]:hover:before,
-  button[type=submit]:hover:after {
+}
+
+button[type=submit]:before {
+    top: 0;
+    left: 0;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    border-top-color: #00aced;
+    border-left-color: #00aced;
+}
+
+button[type=submit]:after {
+    bottom: 0;
+    right: 0;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: #00aced;
+    border-right-color: #00aced;
+}
+
+button[type=submit]:hover:before,
+button[type=submit]:hover:after {
     border-color: #00aced;
     height: 100%;
     width: 100%;
     box-shadow: 0 0 5px #00aced, 0 0 5px #00aced inset;
-  }
-  
-  
-
+}

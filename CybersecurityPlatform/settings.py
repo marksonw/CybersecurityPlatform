@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'research.apps.ResearchConfig',
     'users.apps.UsersConfig',
+    'malwaresearch.apps.MalwaresearchConfig',
 
     'allauth',
     'allauth.account',
