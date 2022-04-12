@@ -144,3 +144,7 @@ button[type=submit]:hover:after {
     width: 100%;
     box-shadow: 0 0 5px #00aced, 0 0 5px #00aced inset;
 }
+
+
+/* Sucess Message */
+.sucess {}

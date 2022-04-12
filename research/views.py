@@ -1,4 +1,5 @@
 from multiprocessing import context
+import profile
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from research.models import Research
@@ -24,13 +25,16 @@ def research(request, pk):
 ## Create Research 
 @login_required(login_url='/')
 def createResearch(request):
+    profile = request.user.profile
     form = ResearchForm()
 
     ## Create Blog Form Submission
     if request.method == 'POST':
         form = ResearchForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            research = form.save(commit=False)
+            research.owner = profile
+            research.save()
         return redirect('researchs')
 
     context = {'form': form}
@@ -40,7 +44,8 @@ def createResearch(request):
 ## Update Research Blog
 @login_required(login_url='/')
 def updateResearch(request, pk):
-    research_blog = Research.objects.get(id=pk)
+    profile = request.user.profile
+    research_blog = profile.research_set.get(id=pk)
     form = ResearchForm(instance=research_blog)
     
     ## Update Blog Form Submission
@@ -56,11 +61,12 @@ def updateResearch(request, pk):
 ## Delete Research Blog
 @login_required(login_url='/')
 def deleteResearch(request, pk):
-    research_blog = Research.objects.get(id=pk)
+    profile = request.user.profile
+    research_blog = profile.research_set.get(id=pk)
 
     ## Delete Blog Submission
     if request.method == "POST":
         research_blog.delete()
         return redirect('researchs')
     context = {'object': research_blog}
-    return render(request, 'research/delete.html', context)
+    return render(request, 'delete.html', context)

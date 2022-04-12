@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container justify-center mx-auto">
+
+
+    <div class="col-span-1 h-96 flex flex-col justify-between items-center">
+        <a href="#" class="w-96 cursor-pointer rounded-md shadow-md shadow-gray-200 bg-blue-900 hover:shadow-blue-400/80 hover:shadow-2xl hover:bg-blue-700 ">
+          <img class="aspect-video bg-cover w-full rounded-t-md min-h-30 max-h-45" src="{{object.banner_image.url}}" />
+          <div class="p-4">
+            <span class="text-gray-400 italic font-normal text-base">{{object.time_stamp.date}}</span>
+            <p class="font-semibold italic text-xl py-2">{{object.research_title}}</p>
+            <p class="font-mono text-white-700 text-justify line-clamp-3">{{object.description}}</p>
+            <div class="flex flex-wrap mt-10 space-x-4 align-bottom">
+
+                {% for tag in object.tags.all  %}
+                <div class="pill bg-[#6b0f1a] rounded-full text-xs italic px-4 py-1">
+                    <small>{{tag|slice:"15"}}</small>
+                </div>
+                {% endfor %}
+                
+            </div>
+            
+          </div>
+        </a>
+
+    
+
+    <form method="POST" action="" class="mt-5">
+        {% csrf_token %}
+        <h1 class='font-mono'>Would you like to delete "{{object}}" ?</h1>
+
+        <div class="h-36 grid grid-cols-2 gap-1 content-evenly">
+            <a href="{% url 'user-account' %}" class='px-6 py-2 text-sm transition-colors duration-300 border-4 rounded-full text-yellow-400 font-bold border-yellow-400 shadow-yellow-300/30 hover:bg-yellow-500 hover:text-yellow-100 text-center'> GO BACK</a>
+            <input type="submit" class="font-bold" value="CONFIRM"/>
+        </div>
+    </form>
+</div>
+{% endblock content %}

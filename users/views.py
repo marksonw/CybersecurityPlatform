@@ -1,12 +1,15 @@
 from email import message
+from multiprocessing import context
+import profile
 from urllib.request import Request
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, ProfileForm, InterestForm
 from .models import Interests, Profile
+
 
 
 
@@ -88,3 +91,55 @@ def userProfile(request, pk):
     context = {'profile': profile, 'interests': interests,}
 
     return render(request, 'users/user-profile.html', context)
+
+@login_required(login_url='accounts/login/')
+def userAccount(request):
+    profile = request.user.profile
+    interests = profile.interests_set.all()
+
+    context = {'profile': profile, 'interests': interests}
+    return render(request, 'users/account.html', context)
+
+@login_required(login_url='accounts/login/')
+def editAccount(request):
+    profile = request.user.profile
+    form = ProfileForm(instance=profile)
+    
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance = profile)
+        if form.is_valid():
+            form.save()
+
+            return redirect('user-account')
+
+    context = {"form": form}
+    return render(request, 'users/edit-profile.html', context)
+
+@login_required(login_url='accounts/login/')
+def createInterest(request):
+    profile = request.user.profile
+    form = InterestForm
+
+    if request.method == "POST":
+        form = InterestForm(request.POST)
+        if form.is_valid():
+            interest = form.save(commit=False)
+            interest.owner = profile
+            interest.save()
+            messages.success(request, 'Skill was added')
+            return redirect('user-account')
+
+    context = {"form": form}
+    return render(request, "users/interests_form.html", context)
+
+
+# def deleteInterest(request, pk):
+#     profile = request.user.profile
+#     interest = profile.interests_set.get(id=pk)
+
+#     if request.method == "POST":
+#         interest.delete()
+#         return redirect('user-account')
+
+#     context ={"object": interest}
+#     return render(request, "delete.html", context)

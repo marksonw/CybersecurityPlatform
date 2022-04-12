@@ -2,9 +2,11 @@
 {% load static %}
 
 {% block content %}
+<div class="mx-auto bg-indigo-900 text-center p-10">
+  <h1 class= "text-center font-mono font-bold italic text-2xl">User Account</h1>
+</div>
 
-<div class="mx-auto mt-5 bg-gradient-to-bl from-slate-900 via-black to-slate-900">
-
+<div class="mx-auto bg-gradient-to-bl from-slate-900 via-black to-slate-900">
 
   <div class="sm:w-1/3 p-2 mx-auto">
     <img src="{% static '/imgs/logo.png' %}" class="w-full">
@@ -16,11 +18,13 @@
           alt=""
         />
       </div>
-      <h2 class="text-xl font-medium text-white-700 italic">{{profile.user|title}}</h2>
+      <a href="{% url "edit-profile"%}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full ">Edit Profile</a>
+      <a href="{% url "create-interests"%}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Create Skills</a>
+      {% comment %} <a href="{% url 'delete-interests' interest.id  %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Delete Skills</a> {% endcomment %}
+      <h2 class=" mt-5 text-xl font-medium text-white-700 italic">{{profile.name}}</h2>
       <br>
       <span class="text-white-500 block mb-5"> <strong class='text-white'>About:</strong> {{profile.bio|slice:"160"}}</span>
 
-      
       <div class="flex inline-block">
         {% for interest in interests|slice:"3" %}
           <div class="pill bg-[#6b0f1a] rounded-full text-xs italic px-4 py-1 mr-2">
@@ -87,6 +91,7 @@
         <p class="text-center text-4xl font-semibold py-4">Research Blogs</p>
         <div class="p-4 gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 select-none">
         {% for research in profile.research_set.all  %}
+        <div class="col-span-1 h-96 flex flex-col justify-between">
           <a href="{% url 'research' research.id %}" class="w-full cursor-pointer rounded-md shadow-md shadow-gray-200 bg-blue-900 hover:shadow-blue-400/80 hover:shadow-2xl hover:bg-blue-700 ">
             <img class="aspect-video bg-cover w-full rounded-t-md min-h-30 max-h-45" src="{{research.banner_image.url}}" />
             <div class="p-4">
@@ -100,11 +105,21 @@
                       <small>{{tag|slice:"15"}}</small>
                   </div>
                   {% endfor %}
-
+                  
               </div>
+              
             </div>
+
+
           </a>
-          {% endfor %}
+
+          <div class="h-56 grid grid-cols-2 gap-4 content-evenly">
+            <a href="{% url 'update-research' research.id %}" class=" text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full m-2">Edit Research</a>
+            <a href="{% url 'delete-research' research.id %}" class=" text-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full m-2">Delete</a>
+          </div>
+
+        </div>
+        {% endfor %}
     {% endif %}
 
       </div>
@@ -115,8 +130,4 @@
 
 
 
-
 {% endblock content %}
-
-
-
