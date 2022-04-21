@@ -1,3 +1,4 @@
+from code import interact
 from email import message
 from multiprocessing import context
 import profile
@@ -9,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CustomUserCreationForm, ProfileForm, InterestForm
 from .models import Interests, Profile
+from .utils import searchProfiles
 
 
 
@@ -77,9 +79,8 @@ from .models import Interests, Profile
 
 @login_required(login_url='accounts/login/')
 def profiles(request):
-    profiles = Profile.objects.all()
-    interests = Interests.objects.all()
-    context = {'profiles': profiles, 'interests': interests}
+    profiles, search_query, Interests = searchProfiles(request)
+    context = {'profiles': profiles, 'search_query': search_query, 'interests': Interests}
     return render(request, 'users/profile.html', context)
 
 @login_required(login_url='accounts/login/')
@@ -140,6 +141,6 @@ def createInterest(request):
 #     if request.method == "POST":
 #         interest.delete()
 #         return redirect('user-account')
-
+        
 #     context ={"object": interest}
 #     return render(request, "delete.html", context)
