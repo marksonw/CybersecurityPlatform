@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CustomUserCreationForm, ProfileForm, InterestForm
 from .models import Interests, Profile
-from .utils import searchProfiles
+from .utils import searchProfiles, paginateProfiles
 
 
 
@@ -80,7 +80,8 @@ from .utils import searchProfiles
 @login_required(login_url='accounts/login/')
 def profiles(request):
     profiles, search_query, Interests = searchProfiles(request)
-    context = {'profiles': profiles, 'search_query': search_query, 'interests': Interests}
+    custom_range, profiles = paginateProfiles(request, profiles, 3)
+    context = {'profiles': profiles, 'search_query': search_query, 'interests': Interests, 'custom_range':custom_range}
     return render(request, 'users/profile.html', context)
 
 @login_required(login_url='accounts/login/')

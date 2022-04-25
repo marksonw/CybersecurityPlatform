@@ -113,32 +113,8 @@
     </section>
 
    {% comment %} Pagination {% endcomment %}
-
-   {% if researchs.has_other_pages %}
-      <div class="flex flex-col items-center my-12">
-        
-            <div class="flex h-12 font-medium rounded-full bg-gray-900">
-
-              {% if researchs.has_previous %}
-              <li class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full m-1 hover:bg-indigo-500"><a href="?page={{researchs.previous_page_number}}">&#10094;</a></li>
-              {% endif %}
-              
-              {% for page in paginator.page_range  %}
-                {% if page == researchs.number %}
-                <li class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full m-1 bg-indigo-900"><a href="?page={{page}}">{{page}}</a></li>
-                {% else %}
-                  <li class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full m-1 hover:bg-indigo-500"><a href="?page={{page}}">{{page}}</a></li>
-                {% endif %}
-              {% endfor %}
-
-              {% if researchs.has_next %}
-              <li class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full m-1 hover:bg-indigo-500"><a href="?page={{researchs.next_page_number}}">&#10095;</a></li>
-              {% endif %}
-          
-            </div>
-
-        </div>
-    {% endif %}
+    {% include "paginator.html" with queryset=researchs custom_range=custom_range%}
+  
 
 
     <br />

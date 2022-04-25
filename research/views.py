@@ -1,34 +1,23 @@
 from multiprocessing import context
 import profile
+from turtle import left
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from research.models import Research
 #from django.http import HttpResponse
 from .models import Research, Tag
 from .forms import ResearchForm
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q
-from .utils import searchResearchs
+from .utils import searchResearchs, paginateResearchs
 
 ## Researchs Menu Page View Routing 
 @login_required(login_url='/')
 def researchs(request):
     researchs, search_query = searchResearchs(request)
+    custom_range, researchs = paginateResearchs(request, researchs, 3)
+  
 
-    page = request.GET.get('page')
-    results = 3
-    paginator = Paginator(researchs, results)
-
-    try:
-        researchs = paginator.page(page)
-    except PageNotAnInteger:
-        page = 1
-        researchs = paginator.page(page)
-    except EmptyPage:
-        page = paginator.num_pages
-        researchs = paginator.page(page)
-
-    context = {'researchs': researchs, 'search_query': search_query, 'paginator': paginator}
+    context = {'researchs': researchs, 'search_query': search_query, 'custom_range': custom_range}
     return render(request, 'research/researchs.html', context)
 
 ## Research Page
