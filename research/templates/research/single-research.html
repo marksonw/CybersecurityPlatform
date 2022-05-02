@@ -1,15 +1,54 @@
 {% extends 'index.html' %}
 
 {% block content %}
+<div class="wrapper w-full bg-gradient-to-t from-slate-900 via-sky-900 to-slate-900 px-10 pt-10">
+<div class="container mx-auto text-center">
     <br>
-    <img src="{{research.banner_image.url}}" alt="banner" id="blog-banner">
-    <h1>{{research.research_title}}</h1>
-    <p>Researcher Name: <bold>{{research.owner}}</bold></p>
+    <h1 class="m-2">{{research.research_title}}</h1>
+    <img src="{{research.banner_image.url}}" alt="banner" id="blog-banner" class="mx-auto border-solid border-2 border-sky-500">
+    
+    <p>Researcher Name: {{research.owner}}</p>
     <hr>
     {% for tags in research.tags.all %}
-        <span style="border: 1px solid red;">{{tags}}</span>
+        <span class="pill bg-[#6b0f1a] rounded-full text-xs italic px-4 py-1 mr-2;">{{tags}}</span>
     {%endfor%}
     <hr>
-    <p>{{research.body|safe}}</p>
+</div>
+</div>
+
+    <div class="container mx-auto">
+        <p>{{research.body|safe}}</p>
+    </div>
+    <br>
+
+<br>
+
+<section class="container mx-auto">
+    <h1 class="text-center text-4xl md:text-2xl text-gray-100 font-semibold mb-12 italic">Feedback</h1>
+    <div class="container mx-auto">
+        {% for feedback  in research.feedback_set.all  %}
+        {% if feedback.message %}
+            <div class="max-w-2xl px-8 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 m-2" style="cursor: auto;">
+                <div class="flex items-center justify-between">
+                <div class="h-3 text-3xl text-left text-indigo-600">“</div>
+                <span class="text-sm font-light text-gray-600 dark:text-gray-400">{{feedback.time_stamp}}</span> 
+                </div> 
+                <div class="mt-2">
+                <p class="mt-2 text-gray-600 dark:text-gray-300 italic text-lg">{{feedback.message|linebreaksbr}}</p>
+                </div>
+                <div class="h-3 text-3xl text-right text-indigo-600">”</div> 
+                <div class="flex items-center justify-between mt-4">
+                <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline"></a> 
+                <div class="flex items-center">
+                    <img href="{% url 'user-profile' feedback.owner.id %}" src="{{feedback.owner.profile_image.url}}" alt="Author Photo" class="hidden object-cover w-10 h-10 mx-4 rounded-full sm:block"> 
+                    <a href="{% url 'user-profile' feedback.owner.id %}" class="font-bold text-white-700 cursor-pointer">{{feedback.owner.username}}</a>
+                </div>
+                </div>
+            </div>
+            </div>
+        {% endif %}
+        {% endfor %}
+    </div>    
+</section>
 
 {% endblock %}

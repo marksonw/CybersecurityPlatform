@@ -2,6 +2,7 @@ from email import message
 from email.policy import default
 from hashlib import blake2b
 from pyexpat import model
+from tkinter import CASCADE
 from turtle import Turtle
 from django.db import models
 from users.models import Profile
@@ -34,10 +35,14 @@ class Research(models.Model):
 
 
 class Feedback(models.Model):
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     time_stamp = models.DateTimeField(auto_now_add=True)
     research = models.ForeignKey(Research, on_delete=models.CASCADE)
     message = models.TextField()
+
+    class Meta:
+        unique_together = [['owner', 'research']]
 
     def __str__(self):
         return str(self.message)
